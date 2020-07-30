@@ -12,6 +12,7 @@ export default function EventListItem(props) {
     venue,
     attendees,
   } = props.event;
+  const { event, handleViewEvent, handleDeleteEvent } = props;
   return (
     <Segment.Group>
       <Segment>
@@ -40,7 +41,20 @@ export default function EventListItem(props) {
       </Segment>
       <Segment clearing>
         <div>{description}</div>
-        <Button color='teal' floated='right' content='view'></Button>
+        <Button
+          color='red'
+          floated='right'
+          content='delete'
+          onClick={handleDeleteEvent}
+        ></Button>
+        <Button
+          color='teal'
+          floated='right'
+          content='view'
+          onClick={() => {
+            handleViewEvent(event);
+          }}
+        ></Button>
       </Segment>
     </Segment.Group>
   );
