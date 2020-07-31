@@ -2,9 +2,12 @@ import React from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import EventListAttendee from './EventListAttendee';
 import { Link } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { deleteEvent } from '../../../actions/index';
 
 export default function EventListItem(props) {
   const {
+    id,
     title,
     hostPhotoURL,
     hostedBy,
@@ -13,7 +16,11 @@ export default function EventListItem(props) {
     venue,
     attendees,
   } = props.event;
-  const { event, handleDeleteEvent } = props;
+  const dispatch = useDispatch();
+
+  const handleDeleteEvent = () => {
+    dispatch(deleteEvent(id));
+  };
   return (
     <Segment.Group>
       <Segment>
@@ -53,7 +60,7 @@ export default function EventListItem(props) {
           floated='right'
           content='View'
           as={Link}
-          to={`/events/${event.id}`}
+          to={`/events/${id}`}
         ></Button>
       </Segment>
     </Segment.Group>
