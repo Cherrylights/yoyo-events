@@ -1,6 +1,7 @@
 import React from 'react';
 import { Segment, Item, Icon, List, Button } from 'semantic-ui-react';
 import EventListAttendee from './EventListAttendee';
+import { Link } from 'react-router-dom';
 
 export default function EventListItem(props) {
   const {
@@ -12,7 +13,7 @@ export default function EventListItem(props) {
     venue,
     attendees,
   } = props.event;
-  const { event, handleViewEvent, handleDeleteEvent } = props;
+  const { event, handleDeleteEvent } = props;
   return (
     <Segment.Group>
       <Segment>
@@ -44,16 +45,15 @@ export default function EventListItem(props) {
         <Button
           color='red'
           floated='right'
-          content='delete'
+          content='Delete'
           onClick={handleDeleteEvent}
         ></Button>
         <Button
           color='teal'
           floated='right'
-          content='view'
-          onClick={() => {
-            handleViewEvent(event);
-          }}
+          content='View'
+          as={Link}
+          to={`/events/${event.id}`}
         ></Button>
       </Segment>
     </Segment.Group>
